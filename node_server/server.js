@@ -1,6 +1,8 @@
-const express = require('express');
-const Groq = require('groq-sdk');
-
+// const express = require('express');
+// const Groq = require('groq-sdk');
+import express from "express";
+import Groq from "groq-sdk";
+import dotenv from "dotenv";
 const groq = new Groq({ apiKey: "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" });
 
 
@@ -43,7 +45,7 @@ async function getGroqChatCompletion(userInput) {
 }
 
 // Start the server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

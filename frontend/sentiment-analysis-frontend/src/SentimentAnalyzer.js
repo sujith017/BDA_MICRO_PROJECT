@@ -8,7 +8,7 @@ const SentimentAnalyzer = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3000/chat', { content: text });
+            const response = await axios.post('http://localhost:5000/chat', { content: text });
             setResult(response.data);
             console.log('Result:', response.data);
         } catch (error) {
