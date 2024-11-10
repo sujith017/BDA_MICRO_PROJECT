@@ -2,11 +2,14 @@
 // const Groq = require('groq-sdk');
 import express from "express";
 import Groq from "groq-sdk";
+import cors from "cors";
 import dotenv from "dotenv";
 const groq = new Groq({ apiKey: "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" });
 
-
 const app = express();
+
+app.use(cors()); 
+app.use(cors({ origin: 'http://localhost:3000' })); 
 app.use(express.json()); 
 
 
