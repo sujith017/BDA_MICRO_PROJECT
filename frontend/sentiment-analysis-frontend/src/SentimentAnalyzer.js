@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import './app.css';
 const SentimentAnalyzer = () => {
     const [text, setText] = useState('');
     const [result, setResult] = useState(null);
@@ -8,7 +8,7 @@ const SentimentAnalyzer = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('https://bda-micro-project-tzgp.vercel.app/api/chat', { content: text });
+            const response = await axios.post('http://localhost:5000/chat', { content: text });
             setResult(response.data);
             console.log('Result:', response.data);
         } catch (error) {
@@ -17,12 +17,11 @@ const SentimentAnalyzer = () => {
     };
 
     return (
-        <div>
+        <div className="sentiment-analyzer-container">
             <h1>Sentiment Analysis</h1>
             <form onSubmit={handleSubmit}>
                 <textarea
                     rows="4"
-                    cols="50"
                     value={text}
                     onChange={(e) => setText(e.target.value)}
                     placeholder="Enter a sentence to analyze sentiment"
@@ -31,7 +30,7 @@ const SentimentAnalyzer = () => {
                 <button type="submit">Analyze</button>
             </form>
             {result && (
-                <div>
+                <div className="result">
                     <h2>Result:</h2>
                     <p>Sentiment: {result.message}</p>
                 </div>

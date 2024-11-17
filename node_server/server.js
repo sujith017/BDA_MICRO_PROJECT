@@ -4,9 +4,12 @@ import express from "express";
 import Groq from "groq-sdk";
 import cors from "cors";
 import dotenv from "dotenv";
-const groq = new Groq({ apiKey: "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" });
+dotenv.config();
+
+const groq = new Groq({ apiKey: process.env.API });
 
 const app = express();
+
 
 app.use(cors()); 
 app.use(cors({ origin: 'http://localhost:3000' })); 
@@ -20,7 +23,7 @@ app.post("/chat", async (req, res) => {
   }
 
   // Prepare the input message by adding a sentiment prompt
-  const prompt = "    Find the Sentiment to the given sentence and give only the sentiment like POSITIVE NEGATIVE NEUTRAL";
+  const prompt = "    Find the Sentiment to the given sentence and give only the sentiment like POSITIVE NEGATIVE NEUTRAL  strictly not other words in response";
   const inp = userInput + prompt;
 
   try {
@@ -34,13 +37,12 @@ app.post("/chat", async (req, res) => {
   }
 });
 
-// Function to get the chat completion
 async function getGroqChatCompletion(userInput) {
   return groq.chat.completions.create({
     messages: [
       {
         role: "user",
-        content: userInput, // Pass the user input message here
+        content: userInput, 
       },
     ],
     model: "llama3-8b-8192",
